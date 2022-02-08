@@ -1,54 +1,50 @@
 ﻿@page "/"
-@using Volo.Abp.MultiTenancy
-@inherits BlazoriseVideoComponentBase
-@inject ICurrentTenant CurrentTenant
-@inject AuthenticationStateProvider AuthenticationStateProvider
-<div class="container">
-    <div class="p-5 text-center">
-        <Badge Color="Color.Success" class="mb-4">
-            <h5 class="m-1"> <i class="fas fa-rocket"></i> Congratulations, <strong>BlazoriseVideo</strong> is successfully running!</h5>
-        </Badge>
 
-        <h1>Welcome to the Application</h1>
+<Row>
+    <Column>
+        <Card Margin="Margin.Is4.OnY">
+            <CardHeader>
+                <CardTitle>Video player</CardTitle>
+            </CardHeader>
+            <CardBody>
+                <Buttons>
+                    <Button Color="Color.Primary" Clicked="@(()=>videoRef.Play())">
+                        <Icon Name="IconName.Play" />
+                    </Button>
+                    <Button Color="Color.Primary" Clicked="@(()=>videoRef.Pause())">
+                        <Icon Name="IconName.Pause" />
+                    </Button>
+                    <Button Color="Color.Primary" Clicked="@(()=>videoRef.Stop())">
+                        <Icon Name="IconName.Stop" />
+                    </Button>
+                </Buttons>
+                <Button Color="Color.Primary" Clicked="@OnChangeVideoUrl">Change Video</Button>
+                <Button Color="Color.Primary" Clicked="@OnChangeCurrentTime">Go to 20 seconds</Button>
+            </CardBody>
+            <CardBody>
+                <Video @ref="@videoRef" Source="@videoUrl" CurrentTime="@currentTime" />
+            </CardBody>
+        </Card>
+    </Column>
+</Row>
+@code {
+    Video videoRef;
+    string videoUrl = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
+    double currentTime = 10;
 
-        <p class="lead px-lg-5 mx-lg-5">@L["LongWelcomeMessage"]</p>
+    Task OnChangeVideoUrl()
+    {
+        videoUrl = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4";
+        currentTime = 0;
 
-        @if ( !CurrentUser.IsAuthenticated )
-        {
-            <a class="btn btn-primary" href="/authentication/login">
-                <i class="fa fa-sign-in-alt"></i> @L["Login"]
-            </a>
-        }
-    </div>
+        return Task.CompletedTask;
+    }
 
-<Button Color="Color.Primary" Clicked="@OnButtonClicked">Click me</Button>
+    Task OnChangeCurrentTime()
+    {
+        currentTime = 20;
 
-</div>
-
-<Modal @ref="PreviewStreamModal" Closing="@OnModalClosing">
-    <ModalContent IsCentered="true" Size="ModalSize.Large">
-        <ModalHeader>
-            <ModalTitle>@L["PreviewModalTitle"]</ModalTitle>
-             <CloseButton Clicked="@HidePreviewModal" />
-        </ModalHeader>
-        <ModalBody>
-            <Row>
-                <Text Color="TextColor.Primary">
-                    @L["PreviewExplainText"]
-                </Text>
-                <Field ColumnSize="ColumnSize.Is12.OnDesktop">
-                    <FieldLabel></FieldLabel>
-                    <Field>
-                    <Video  Source="@video.DashUrl" 
-                            ProtectionType="VideoProtectionType.Widevine"
-                            StreamingLibrary="StreamingLibrary.Dash"
-                            ProtectionHttpRequestHeaders="@video.Token"/>  
-                    </Field>
-                </Field>
-            </Row>
-        </ModalBody>
-        <ModalFooter>
-            <Button Color="Color.Secondary" Clicked="@HidePreviewModal">Close</Button>
-        </ModalFooter>
-    </ModalContent>
-</Modal>
+        return Task.CompletedTask;
+    }
+} }
+}
