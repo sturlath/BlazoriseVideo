@@ -6,7 +6,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <RootNamespace>Blazorise.Video</RootNamespace>
   </PropertyGroup>
-
+  
   <PropertyGroup>
     <PackageTags>blazorise blazor video</PackageTags>
   </PropertyGroup>
@@ -14,13 +14,12 @@
   <PropertyGroup>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
-
   <!--This way I can at least have the almost newest stuff-->
   <ItemGroup>
     <PackageReference Include="Blazorise" Version="1.0.0-preview1" />
   </ItemGroup>
 
-  Added the License.md file to the project root folder
+  <!--Added the License.md file to the project root folder-->
   <!--<ItemGroup>
     <None Include="..\..\..\LICENSE.md" Pack="true" Visible="false" PackagePath="" />
     <None Include="..\..\..\NuGet\Blazorise.png" Pack="true" Visible="false" PackagePath="" />
