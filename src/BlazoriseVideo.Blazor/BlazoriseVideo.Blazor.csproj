@@ -9,6 +9,8 @@
 
   <ItemGroup>
     <PackageReference Include="Blazorise.Bootstrap5" Version="1.0.0-preview1" />
+    <PackageReference Include="Blazorise.Charts" Version="1.0.0-preview1" />
+    <PackageReference Include="Blazorise.Charts.Streaming" Version="1.0.0-preview1" />
     <PackageReference Include="Blazorise.Icons.FontAwesome" Version="1.0.0-preview1" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.0" />

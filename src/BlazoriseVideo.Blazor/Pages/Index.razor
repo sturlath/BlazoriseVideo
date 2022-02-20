@@ -1,4 +1,5 @@
 ﻿@page "/"
+@inject NavigationManager NavigationManager
 
 <Row>
     <Column>
@@ -22,11 +23,14 @@
                 <Button Color="Color.Primary" Clicked="@OnChangeCurrentTime">Go to 20 seconds</Button>
             </CardBody>
             <CardBody>
-                <Video @ref="@videoRef" Source="@videoUrl" CurrentTime="@currentTime" />
-            </CardBody>
+                    <Video Source="@("https://valur-97caf219-514b-eventstreamingdev.preview-euno.channel.media.azure.net/a9645e9c-aa59-4c56-991d-7dc7c9d927eb/preview.ism/manifest")" StreamingLibrary="StreamingLibrary.None" />
+                </CardBody>
         </Card>
     </Column>
 </Row>
+
+<button class="btn btn-primary" @onclick="NavigateToCounterComponent"> Navigate to Chart </button>
+
 @code {
     Video videoRef;
     string videoUrl = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
@@ -46,4 +50,6 @@
 
         return Task.CompletedTask;
     }
+
+    private void NavigateToCounterComponent() { NavigationManager.NavigateTo("chart"); }
 } 
